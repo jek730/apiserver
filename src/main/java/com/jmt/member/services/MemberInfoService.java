@@ -27,11 +27,13 @@ public class MemberInfoService implements UserDetailsService {
 
         List<Authorities> tmp = member.getAuthorities();
         if (tmp == null || tmp.isEmpty()) {
-            tmp = List.of(Authorities.builder().member(member).authority(Authority.USER).build());
+            tmp = List.of(Authorities.builder().member(member).authority(Authority.USER)
+                    .build());
         }
 
         List<SimpleGrantedAuthority> authorities = tmp.stream()
-                .map(a -> new SimpleGrantedAuthority(a.getAuthority().name()))
+                .map(a -> new SimpleGrantedAuthority(a.getAuthority().name())
+                )
                 .toList();
 
         return MemberInfo.builder()

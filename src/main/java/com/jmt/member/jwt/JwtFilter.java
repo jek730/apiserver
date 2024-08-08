@@ -21,7 +21,7 @@ public class JwtFilter extends GenericFilterBean {
     private final TokenProvider provider;
 
     /**
-     * 요청헤더  Authorization: Bearer JWT토큰 값
+     * 요청헤더 Authorization: bearer JWT토큰 값
      *
      * @param request
      * @param response
@@ -43,8 +43,8 @@ public class JwtFilter extends GenericFilterBean {
     }
 
     /**
-     *  요청 헤더에서 JWT 토큰 추출
-     *  Authorization: Bearer JWT토큰 값
+     * 요청 헤더에서 JWT 토큰 추출
+     * Authorization: bearer JWT토큰 값
      *
      * @param request
      * @return
@@ -53,7 +53,7 @@ public class JwtFilter extends GenericFilterBean {
         HttpServletRequest req = (HttpServletRequest) request;
         String bearerToken = req.getHeader("Authorization");
         if (StringUtils.hasText(bearerToken)
-                && bearerToken.toUpperCase().startsWith("BEARER ")) {
+                && bearerToken.toUpperCase().startsWith("BEARER")) {
             return bearerToken.substring(7).trim();
         }
 
