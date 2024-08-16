@@ -6,7 +6,6 @@ import com.jmt.board.entities.BoardData;
 import com.jmt.board.exceptions.BoardDataNotFoundException;
 import com.jmt.board.exceptions.BoardNotFoundException;
 import com.jmt.board.repositories.BoardDataRepository;
-import com.jmt.board.repositories.BoardRepository;
 import com.jmt.file.services.FileUploadDoneService;
 import com.jmt.member.MemberUtil;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,12 +15,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+@Service
 @Transactional
 @RequiredArgsConstructor
-@Service
-public class BoardSaveService { private final HttpServletRequest request;
+public class BoardSaveService {
+
+    private final HttpServletRequest request;
     private final PasswordEncoder encoder;
-    private final BoardRepository boardRepository;
+    private final BoardConfigInfoService configInfoService;
     private final BoardDataRepository boardDataRepository;
     private final MemberUtil memberUtil;
     private final FileUploadDoneService doneService;
@@ -39,7 +40,7 @@ public class BoardSaveService { private final HttpServletRequest request;
             data = boardDataRepository.findById(seq).orElseThrow(BoardDataNotFoundException::new);
         } else { // 글 작성
             String bid = form.getBid();
-            Board board = boardRepository.findById(bid).orElseThrow(BoardNotFoundException::new);
+            Board board = configInfoService.get(bid).orElseThrow(BoardNotFoundException::new);
 
             data = BoardData.builder()
                     .gid(gid)

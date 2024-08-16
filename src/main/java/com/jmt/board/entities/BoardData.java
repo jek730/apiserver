@@ -1,6 +1,5 @@
 package com.jmt.board.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jmt.global.entities.BaseEntity;
 import com.jmt.member.entities.Member;
 import jakarta.persistence.*;
@@ -12,10 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(indexes = @Index(name = "idx_board_data", columnList = "notice DESC, createdAt DESC"))
-@JsonIgnoreProperties(ignoreUnknown = true)
+@NoArgsConstructor @AllArgsConstructor
+@Table(indexes = @Index(name="idx_board_data", columnList = "notice DESC, createdAt DESC"))
 public class BoardData extends BaseEntity {
     @Id @GeneratedValue
     private Long seq;

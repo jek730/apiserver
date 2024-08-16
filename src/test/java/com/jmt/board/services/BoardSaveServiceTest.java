@@ -3,7 +3,6 @@ package com.jmt.board.services;
 import com.jmt.board.controllers.RequestBoard;
 import com.jmt.board.entities.Board;
 import com.jmt.board.entities.BoardData;
-import com.jmt.board.repositories.BoardRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,6 @@ public class BoardSaveServiceTest {
     @Autowired
     private BoardSaveService saveService;
 
-    @Autowired
-    private BoardRepository boardRepository;
-
     private Board board;
 
     @BeforeEach
@@ -26,20 +22,6 @@ public class BoardSaveServiceTest {
         board = new Board();
         board.setBid("freetalk");
         board.setBName("자유게시판");
-/*
-         board = Board.builder()
-                .bid("freetalk")
-                .bName("자유게시판")
-                 .gid(UUID.randomUUID().toString())
-                 .listAccessType(Authority.ALL)
-                 .writeAccessType(Authority.ALL)
-                 .commentAccessType(Authority.ALL)
-                 .viewAccessType(Authority.ALL)
-                 .replyAccessType(Authority.ALL)
-                 .locationAfterWriting("list")
-                .build();
-*/
-        boardRepository.saveAndFlush(board);
     }
 
     @Test
