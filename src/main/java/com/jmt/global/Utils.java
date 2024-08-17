@@ -9,6 +9,7 @@ import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,11 +23,10 @@ public class Utils { // 빈의 이름 - utils
     private final MessageSource messageSource;
     private final HttpServletRequest request;
     private final DiscoveryClient discoveryClient;
-
+    private final RestTemplate restTemplate;
 
     public Map<String, List<String>> getErrorMessages(Errors errors) {
         // FieldErrors
-
 
         Map<String, List<String>> messages = errors.getFieldErrors()
                 .stream()
