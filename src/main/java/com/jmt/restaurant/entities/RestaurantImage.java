@@ -20,6 +20,6 @@ public class RestaurantImage {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "restrId")
+    @JoinColumn(name="rstrId")
     private Restaurant restaurant;
 }

@@ -31,14 +31,15 @@ public class DataTransferService {
     private final FoodMenuImageRepository foodMenuImageRepository;
 
     private final RestTemplate restTemplate;
-
-    private String serviceKey = "8Mu7gNxO98975QV25VMKBnsDC82WaomG1raYEiOXoi3kOTGsi89KCUJBxZI0HNz6";
+    private String serviceKey = "z9SCa7e4OYqaeIcqE3PpGGQuFPmzFEhwalusHnXX6YytyWDJCGUw80ppxFo4YPp1";
 
     /**
      * 식당 기본 정보
+     *
      */
     public void update1(int pageNo) {
         pageNo = Math.max(pageNo, 1);
+
         String url = String.format("https://seoul.openapi.redtable.global/api/rstr?serviceKey=%s&pageNo=%d", serviceKey, pageNo);
 
         ResponseEntity<ApiResult> response = restTemplate.getForEntity(URI.create(url), ApiResult.class);
@@ -67,8 +68,8 @@ public class DataTransferService {
                             .rstrNm(d.get("RSTR_NM"))
                             .rstrRdnmAdr(d.get("RSTR_RDNMADR"))
                             .rstrLnnoAdres(d.get("RSTR_LNNO_ADRES"))
-                            .rstrLa(Double.valueOf(d.get("RSTR_LA")  == null ? "0.0" : d.get("RSTR_LA")))
-                            .rstrLo(Double.valueOf(d.get("RSTR_LO") == null ? "0.0" : d.get("RSTR_LO")))
+                            .rstrLa(Double.valueOf(d.get("RSTR_LA")))
+                            .rstrLo(Double.valueOf(d.get("RSTR_LO")))
                             .rstrTelNo(d.get("RSTR_TELNO"))
                             .dbsnsStatmBzcndNm(d.get("BSNS_STATM_BZCND_NM"))
                             .bsnsLcncNm(d.get("BSNS_LCNC_NM"))
@@ -188,11 +189,11 @@ public class DataTransferService {
                             .menuNm(d.get("MENU_NM"))
                             .menuPrice(Integer.valueOf(d.get("MENU_PRICE")))
                             .spcltMenuYn(d.get("SPCLT_MENU_YN").equals("Y"))
-                            .spcltMenuNm(d.get("SPCLT_MENU_NM"))
                             .spcltMenuOgnUrl(d.get("SPCLT_MENU_OGN_URL"))
+                            .spcltMenuNm(d.get("SPCLT_MENU_NM"))
                             .build();
 
-                    Map<String, String> extra = getExtra(tmp2, d.get("MENU_ID"), "MENU" );
+                    Map<String, String> extra = getExtra(tmp2, d.get("MENU_ID"), "MENU");
                     if (extra != null) {
                         food.setMenuDscrn(extra.get("MENU_DSCRN"));
                         food.setMenuCtgryLclasNm(extra.get("MENU_CTGRY_LCLAS_NM"));
